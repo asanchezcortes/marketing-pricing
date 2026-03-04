@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Strategy Challenge — Windham High School</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1eb;--surface:#fffef9;--surface2:#edeae3;--border:#d8d3c8;--ink:#1a1814;--ink2:#4a453e;--ink3:#8a857d;--red:#c0392b;--green:#1a7a4a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+.wrapper{max-width:860px;margin:0 auto;padding:0 24px 60px;}
+header{padding:32px 0 24px;border-bottom:2px solid var(--ink);margin-bottom:40px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.logo-block h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.1;}
+.logo-block h1 em{font-style:normal;color:var(--red);border-bottom:3px solid var(--red);}
+.logo-block .sub{font-size:11px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+.header-meta{text-align:right;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:4px;}
+.header-meta .hname{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.header-meta .dept{font-size:10px;letter-spacing:1px;text-transform:uppercase;opacity:0.7;margin-top:2px;}
+#nameSection{background:var(--surface);border:2px solid var(--ink);border-radius:8px;padding:32px;margin-bottom:32px;text-align:center;}
+#nameSection h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;}
+#nameSection p{font-size:14px;color:var(--ink2);margin-bottom:20px;}
+.name-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+#sName{padding:11px 16px;border:2px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:15px;width:280px;background:var(--bg);color:var(--ink);outline:none;}
+#sName:focus{border-color:var(--ink);}
+.btn-ink{padding:11px 28px;background:var(--ink);color:var(--bg);border:none;border-radius:6px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;}
+.btn-ink:hover{background:var(--red);}
+.prog-wrap{margin-bottom:28px;}
+.prog-top{display:flex;justify-content:space-between;margin-bottom:8px;}
+.prog-lbl{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:1px;text-transform:uppercase;}
+.prog-ct{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
+.prog-track{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden;border:1px solid var(--border);}
+.prog-fill{height:100%;background:var(--ink);border-radius:99px;transition:width 0.5s ease;}
+.score-strip{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+.score-pill{flex:1;min-width:100px;background:var(--surface);border:1.5px solid var(--border);border-radius:6px;padding:10px 14px;text-align:center;}
+.sp-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);font-weight:600;}
+.sp-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-top:2px;}
+.sp-val.g{color:var(--green);}.sp-val.r{color:var(--red);}
+.ref-btn{display:flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--border);border-radius:6px;padding:8px 16px;cursor:pointer;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink2);margin-bottom:16px;}
+.ref-btn:hover{border-color:var(--ink);color:var(--ink);}
+.ref-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:28px;display:none;}
+.ref-panel.open{display:block;}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.ri{padding:12px 16px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
+.ri-n{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;}
+.ri-d{font-size:11px;color:var(--ink3);line-height:1.5;}
+.sc-card{background:var(--surface);border:2px solid var(--ink);border-radius:10px;overflow:hidden;margin-bottom:28px;animation:up 0.4s ease;}
+@keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.sc-hdr{background:var(--ink);color:var(--bg);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.sc-num{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.6;}
+.sc-tag{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:rgba(255,255,255,0.15);}
+.sc-body{padding:28px 28px 24px;}
+.sc-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:12px;line-height:1.3;}
+.sc-desc{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:20px;}
+.var-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px;}
+.vp{background:var(--bg);border:1.5px solid var(--border);border-radius:6px;padding:10px 14px;}
+.vp-k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:3px;}
+.vp-v{font-size:13px;font-weight:600;}
+.pick-lbl{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
+.sb{padding:14px 18px;background:var(--bg);border:2px solid var(--border);border-radius:8px;cursor:pointer;text-align:left;transition:all 0.18s;font-family:'Inter',sans-serif;}
+.sb:hover:not(:disabled){border-color:var(--ink);background:var(--surface2);transform:translateY(-1px);}
+.sb:disabled{cursor:default;}
+.sb-n{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px;}
+.sb-h{font-size:11px;color:var(--ink3);line-height:1.4;}
+.sb.correct{background:#e8f7ee;border-color:var(--green);}.sb.correct .sb-n{color:var(--green);}
+.sb.wrong{background:#fdecea;border-color:var(--red);}.sb.wrong .sb-n{color:var(--red);}
+.sb.dim{opacity:0.35;}
+.fb{margin-top:20px;padding:18px 22px;border-radius:8px;border-left:4px solid;display:none;}
+.fb.show{display:block;animation:fi 0.3s ease;}
+@keyframes fi{from{opacity:0;}to{opacity:1;}}
+.fb.cfb{background:#e8f7ee;border-color:var(--green);}.fb.wfb{background:#fdecea;border-color:var(--red);}
+.fb-v{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;margin-bottom:6px;}
+.cfb .fb-v{color:var(--green);}.wfb .fb-v{color:var(--red);}
+.fb-e{font-size:13px;color:var(--ink2);line-height:1.6;}
+.nb{display:inline-block;margin-top:16px;padding:12px 28px;background:var(--ink);color:var(--bg);border:none;border-radius:6px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;}
+.nb:hover{background:var(--red);}
+#refSec{background:var(--surface);border:2px solid var(--ink);border-radius:10px;padding:32px;margin-bottom:32px;display:none;}
+#refSec.show{display:block;animation:up 0.5s ease;}
+.ref-h{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;}
+.ref-s{font-size:13px;color:var(--ink3);margin-bottom:28px;}
+.rq{margin-bottom:24px;}
+.rq label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;line-height:1.6;}
+.qn{font-family:'Syne',sans-serif;font-weight:800;color:var(--red);}
+textarea{width:100%;min-height:90px;padding:12px 14px;border:2px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--bg);resize:vertical;outline:none;line-height:1.6;}
+textarea:focus{border-color:var(--ink);}
+#sumSec{display:none;margin-bottom:32px;}
+#sumSec.show{display:block;animation:up 0.5s ease;}
+.sum-card{background:var(--surface);border:2px solid var(--ink);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+.sum-hdr{background:var(--ink);color:var(--bg);padding:16px 24px;}
+.sum-hdr h2{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;}
+.sum-table{width:100%;border-collapse:collapse;font-size:13px;}
+.sum-table th{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);padding:10px 16px;text-align:left;border-bottom:1.5px solid var(--border);font-weight:600;}
+.sum-table td{padding:10px 16px;border-bottom:1px solid var(--border);}
+.sum-table tr:last-child td{border-bottom:none;}
+.cc{color:var(--green);font-weight:600;}.wc{color:var(--red);font-weight:600;}
+#expSec{background:var(--surface);border:2px solid var(--ink);border-radius:10px;padding:28px;display:none;}
+#expSec.show{display:block;}
+.exp-t{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:6px;}
+.exp-s{font-size:13px;color:var(--ink3);margin-bottom:20px;}
+.exp-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.eb{padding:13px 24px;border:2px solid var(--ink);border-radius:6px;cursor:pointer;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;transition:all 0.2s;}
+.eb.p{background:var(--ink);color:var(--bg);}.eb.p:hover{background:var(--red);border-color:var(--red);}
+.eb.s{background:transparent;color:var(--ink);}.eb.s:hover{background:var(--ink);color:var(--bg);}
+.gc-tip{font-size:12px;color:var(--ink3);margin-top:14px;padding:12px 16px;background:var(--bg);border-radius:6px;border:1px solid var(--border);line-height:1.7;}
+.hidden{display:none!important;}
+.stamp{display:inline-block;border:2.5px solid;border-radius:3px;padding:3px 8px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;transform:rotate(-5deg);}
+.stamp.c{color:var(--green);border-color:var(--green);}.stamp.w{color:var(--red);border-color:var(--red);}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<header>
+  <div class="logo-block">
+    <h1>PRICING STRATEGY<br><em>CHALLENGE</em></h1>
+    <div class="sub">Windham High School &middot; Marketing Simulation</div>
+  </div>
+  <div class="header-meta">
+    <div class="hname">Dr. Sanchez</div>
+    <div class="dept">Business, Manufacturing, Engineering<br>&amp; Technology (BMET)</div>
+  </div>
+</header>
+
+<!-- STUDENT NAME -->
+<div id="nameSection">
+  <h2>Welcome, Student! &#128075;</h2>
+  <p>Enter your full name to begin. Your score and reflections will be saved so you can submit to Google Classroom.</p>
+  <div class="name-row">
+    <input type="text" id="sName" placeholder="First and Last Name" onkeydown="if(event.key==='Enter')go()">
+    <button class="btn-ink" onclick="go()">START &#8594;</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="gameSection" class="hidden">
+  <div class="prog-wrap">
+    <div class="prog-top">
+      <span class="prog-lbl">Scenario Progress</span>
+      <span class="prog-ct"><span id="rn">0</span> / 15</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+  </div>
+  <div class="score-strip">
+    <div class="score-pill"><div class="sp-lbl">Correct</div><div class="sp-val g" id="sc">0</div></div>
+    <div class="score-pill"><div class="sp-lbl">Incorrect</div><div class="sp-val r" id="sw">0</div></div>
+    <div class="score-pill"><div class="sp-lbl">Accuracy</div><div class="sp-val" id="sa">&#8212;</div></div>
+    <div class="score-pill"><div class="sp-lbl">Streak &#128293;</div><div class="sp-val" id="ss">0</div></div>
+  </div>
+
+  <button class="ref-btn" onclick="toggleRef()">&#128214; <span id="rl">Show Strategy Reference</span></button>
+  <div class="ref-panel" id="refPanel"><div class="ref-grid" id="refGrid"></div></div>
+
+  <div class="sc-card" id="scCard">
+    <div class="sc-hdr">
+      <span class="sc-num" id="scN">SCENARIO 1 OF 15</span>
+      <span class="sc-tag" id="scT"></span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-title" id="scTi"></div>
+      <div class="sc-desc" id="scD"></div>
+      <div class="var-grid" id="vg"></div>
+      <div class="pick-lbl">&#8594; Which pricing strategy should this business use?</div>
+      <div class="sg" id="sg"></div>
+      <div class="fb" id="fb">
+        <div class="fb-v" id="fbv"></div>
+        <div class="fb-e" id="fbe"></div>
+        <button class="nb" id="nb" onclick="next()">Next Scenario &#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div id="refSec">
+  <div class="ref-h">&#128221; Reflection Questions</div>
+  <div class="ref-s">You have completed all 15 scenarios! Answer these 3 questions thoughtfully. They will be included in your submitted report.</div>
+  <div class="rq">
+    <label><span class="qn">Q1.</span> Which pricing strategy was hardest to identify? What made it difficult, and what clues in the scenario conditions should have helped you recognize it?</label>
+    <textarea id="r1" placeholder="Write your answer here..."></textarea>
+  </div>
+  <div class="rq">
+    <label><span class="qn">Q2.</span> Choose one scenario you answered incorrectly. Describe the conditions in that scenario, then explain in your own words why the correct strategy was actually the better business decision.</label>
+    <textarea id="r2" placeholder="Write your answer here..."></textarea>
+  </div>
+  <div class="rq">
+    <label><span class="qn">Q3.</span> Think of a real product or business you know — a store, app, restaurant, or brand. What pricing strategy do you think they use? Use specific conditions (competition, product type, target customer, production cost) to support your reasoning.</label>
+    <textarea id="r3" placeholder="Write your answer here..."></textarea>
+  </div>
+  <button class="nb" onclick="submitR()">Submit &amp; See My Results &#8594;</button>
+</div>
+
+<!-- SUMMARY -->
+<div id="sumSec">
+  <div class="sum-card">
+    <div class="sum-hdr"><h2 id="sumH"></h2></div>
+    <table class="sum-table">
+      <thead><tr><th>#</th><th>Scenario</th><th>Your Choice</th><th>Correct Answer</th><th>Result</th></tr></thead>
+      <tbody id="sumB"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div id="expSec">
+  <div class="exp-t">&#128228; Save &amp; Submit to Google Classroom</div>
+  <div class="exp-s">Download your report and upload it as an attachment in your Google Classroom assignment.</div>
+  <div class="exp-btns">
+    <button class="eb p" onclick="dl()">&#8595; Download Report (.txt)</button>
+    <button class="eb s" onclick="window.print()">&#128424; Print / Save as PDF</button>
+  </div>
+  <div class="gc-tip">
+    <strong>&#128204; How to submit on Google Classroom:</strong><br>
+    1. Click <em>Download Report</em> above &mdash; a .txt file will save to your Downloads folder.<br>
+    2. Open your Google Classroom assignment and click <strong>+ Add or create &rarr; File</strong>.<br>
+    3. Select the downloaded report file and click <strong>Turn In</strong>.
+  </div>
+</div>
+
+</div><!-- end wrapper -->
+
+<script>
+const ST={
+  penetration:{name:"Penetration Pricing",hint:"Low price to enter fast & build market share"},
+  skimming:{name:"Price Skimming",hint:"High launch price, lower gradually over time"},
+  competitive:{name:"Competitive Pricing",hint:"Match or stay close to competitor prices"},
+  premium:{name:"Premium Pricing",hint:"High price signals luxury & exclusivity"},
+  bundle:{name:"Bundle Pricing",hint:"Group products together at a total discount"},
+  dynamic:{name:"Dynamic Pricing",hint:"Prices shift based on demand or time"},
+  costplus:{name:"Cost-Plus Pricing",hint:"Add a fixed markup % to production cost"},
+  economy:{name:"Economy Pricing",hint:"Lowest possible price, high volume, thin margins"}
+};
+
+const SC=[
+  {
+    title:"New Streaming Music App",
+    tag:"Technology",
+    desc:"A startup launches a music streaming app going up against Spotify and Apple Music. The product has similar features but zero brand recognition. They must attract users fast to earn advertising revenue.",
+    vars:{"Product Life Cycle":"Introduction","Competition":"Very High (Spotify, Apple Music)","Product Type":"Digital service","Production Cost":"Low — mostly server costs","Target Customer":"Price-sensitive young adults","Brand Strength":"None yet"},
+    correct:"penetration",
+    exp:"A crowded market with no brand loyalty means a very low (or free) entry price is the only way to attract users quickly. This creates the volume needed to appeal to advertisers. Low marginal cost per user makes this financially sustainable."
+  },
+  {
+    title:"Limited-Edition Luxury Watch",
+    tag:"Luxury Goods",
+    desc:"A Swiss watchmaker releases a hand-crafted, limited timepiece — only 200 will ever exist. The brand has a 150-year legacy. Target buyers are wealthy collectors who see price as a quality signal.",
+    vars:{"Product Life Cycle":"New product, legacy brand","Competition":"Low — no replica exists","Product Type":"Luxury physical good","Production Cost":"Very High","Target Customer":"Wealthy collectors","Scarcity":"Only 200 units made"},
+    correct:"premium",
+    exp:"Wealthy collectors expect a high price as proof of quality and exclusivity. Scarcity plus brand prestige justify premium pricing — a low price would actually damage credibility. High margin per unit compensates for intentionally low volume."
+  },
+  {
+    title:"New Brand of Paper Towels",
+    tag:"Consumer Goods",
+    desc:"A manufacturer enters the paper towel market already packed with Bounty, Viva, and store brands. The product is functionally identical to competitors. Production costs are nearly the same.",
+    vars:{"Product Life Cycle":"Mature commodity market","Competition":"Extremely high","Product Type":"Commodity — no difference","Production Cost":"Same as competitors","Brand Strength":"Unknown / none","Differentiation":"Very low"},
+    correct:"competitive",
+    exp:"In a commodity market with no differentiation, customers simply compare prices. Charging more drives shoppers away. Matching the market price is the sustainable play until the brand can develop a unique selling point."
+  },
+  {
+    title:"Next-Gen VR Headset Launch",
+    tag:"Technology",
+    desc:"A tech company releases a breakthrough VR headset with features nobody else has. Tech enthusiasts are lining up. Competing products are expected to arrive in about 18 months.",
+    vars:{"Product Life Cycle":"Introduction — first of its kind","Competition":"None right now","Product Type":"Innovative consumer hardware","Production Cost":"High (R&D + manufacturing)","Target Customer":"Tech-forward early adopters","Window":"~18 months before competition arrives"},
+    correct:"skimming",
+    exp:"First-mover advantage with a genuinely new product allows a high launch price. Early adopters will pay a premium to be first. The company recoups high R&D costs quickly, then lowers price as competition enters to reach mainstream buyers."
+  },
+  {
+    title:"Fast Food Value Combo Meal",
+    tag:"Food & Beverage",
+    desc:"A fast food chain wants to increase how much each customer spends per visit. Customers often buy just a burger. Ingredients are cheap and the restaurant wants to move more fries and drinks per order.",
+    vars:{"Product Life Cycle":"Mature","Competition":"High — all fast food chains compete","Product Type":"Perishable food items","Production Cost":"Low per item","Customer Goal":"Feel like they got a deal","Strategy Goal":"Increase items sold per transaction"},
+    correct:"bundle",
+    exp:"Grouping burger + fries + drink at a slightly lower total price makes customers feel they are saving money — so they buy more. The business increases average transaction size and moves inventory efficiently. This is the classic combo meal in action."
+  },
+  {
+    title:"Holiday Weekend Airline Seats",
+    tag:"Travel",
+    desc:"An airline has 150 seats on a Thanksgiving flight to Miami. Demand spikes as the holiday approaches. An empty seat at departure is revenue lost forever. Buyers range from early planners to last-minute travelers.",
+    vars:{"Product Life Cycle":"N/A — resets each flight","Competition":"2-3 other airlines on route","Product Type":"Perishable service","Demand Pattern":"Surges as holiday approaches","Buyer Types":"Early planners vs. last-minute"},
+    correct:"dynamic",
+    exp:"Dynamic pricing raises fares as demand increases and seats fill, capturing maximum revenue from willing buyers. Early planners get lower prices; last-minute travelers pay more. Since every empty seat is permanently lost revenue, real-time price optimization fills the plane most profitably."
+  },
+  {
+    title:"Budget Grocery Store Cereal",
+    tag:"Retail",
+    desc:"A grocery chain launches its own store-brand cereal to compete with Kellogg's and General Mills. No unique recipe. Target shoppers are budget-conscious families looking for the lowest shelf price.",
+    vars:{"Product Life Cycle":"Mature commodity category","Competition":"National brands with huge ad budgets","Product Type":"Commodity food","Production Cost":"Low — no branding or ad costs","Target Customer":"Budget-conscious value shoppers","Margin Goal":"Thin margin, very high volume"},
+    correct:"economy",
+    exp:"Store-brand products win by stripping away advertising and branding costs, passing savings to shoppers. Economy pricing locks in budget shoppers who return consistently. Thin margins become profitable only through very high sales volume."
+  },
+  {
+    title:"Artisan Bakery Cupcakes",
+    tag:"Small Business",
+    desc:"A small local bakery makes handmade cupcakes. Each batch takes 2 hours. Ingredients cost $1.50 per cupcake. The owner needs to cover labor, rent, and utilities and earn a fair living.",
+    vars:{"Product Life Cycle":"Stable local market","Competition":"Few nearby bakeries","Product Type":"Handmade perishable food","Production Cost":"$1.50 ingredients + labor + overhead","Daily Capacity":"Limited — a few batches only","Owner Goal":"Cover all costs and earn profit"},
+    correct:"costplus",
+    exp:"Cost-plus pricing is ideal for small businesses with predictable, known costs. The baker calculates total cost per cupcake and adds a desired profit markup. Every sale is guaranteed to cover costs and contribute to profit — no complex market analysis needed."
+  },
+  {
+    title:"Software Suite for Small Teams",
+    tag:"SaaS",
+    desc:"A software startup sells three tools separately: a project tracker, a time logger, and an invoicing app. Most customers buy one and ignore the others. The company wants more revenue per user and lower cancellations.",
+    vars:{"Product Life Cycle":"Growth stage","Competition":"High — many SaaS competitors","Product Type":"Digital software tools","Production Cost":"Near zero per additional user","Customer Behavior":"Using only one of three tools","Goal":"Increase revenue and retention per customer"},
+    correct:"bundle",
+    exp:"A suite bundle at a discounted combined price ties customers to the full ecosystem. Users who rely on more features cancel far less often. Revenue per customer increases, and since software has near-zero marginal cost, bundling is highly profitable."
+  },
+  {
+    title:"Electric Vehicle Startup Launch",
+    tag:"Automotive",
+    desc:"A new EV startup's first car has measurably better range and self-driving features than Tesla. Excitement is high. Production costs are $45,000 per vehicle. Wealthy tech consumers are eager to own the best.",
+    vars:{"Product Life Cycle":"Introduction","Competition":"Tesla, Rivian, Lucid","Product Type":"Innovative durable good","Production Cost":"$45,000 per vehicle","Target Customer":"Wealthy early adopters","Differentiation":"Proven technical superiority"},
+    correct:"skimming",
+    exp:"Genuine technical superiority plus a wealthy, eager customer base who want to be first justifies a high launch price. Price skimming lets the company recover enormous R&D investment quickly. After the early-adopter wave, prices drop to attract mainstream buyers as production scales."
+  },
+  {
+    title:"New Gym in a Competitive Neighborhood",
+    tag:"Fitness",
+    desc:"A new gym opens where Planet Fitness charges $10/month and Equinox charges $200/month. The new gym has solid equipment but no luxury amenities. It needs to reach break-even membership within 6 months.",
+    vars:{"Product Life Cycle":"New business launch","Competition":"Dominant budget AND luxury options","Product Type":"Monthly service membership","Fixed Costs":"High (rent, equipment)","Target Customer":"Middle-income adults","Break-even Goal":"Must hit volume within 6 months"},
+    correct:"penetration",
+    exp:"With both a budget and a luxury option already established, the new gym targets the middle by launching at a promotional low price to sign up members fast. Reaching break-even requires volume — penetration pricing drives sign-ups. Once trusted and established, prices can adjust toward market rate."
+  },
+  {
+    title:"Sold-Out Concert Ticket Resale",
+    tag:"Entertainment",
+    desc:"A ticketing platform is reselling seats for a sold-out Taylor Swift concert. Original price was $150, but demand signals buyers would pay $600 or more. Tickets lose all value the moment the show ends.",
+    vars:{"Product Life Cycle":"One-time event","Competition":"StubHub, Ticketmaster","Product Type":"Perishable event ticket","Demand":"Far exceeds supply","Time Pressure":"Zero value after showtime"},
+    correct:"dynamic",
+    exp:"Dynamic pricing captures maximum revenue from willing buyers when demand far exceeds supply. Prices adjust automatically — early buyers pay less, last-minute buyers pay more. Since tickets are worthless after the show, all value must be captured before it ends."
+  },
+  {
+    title:"Generic USB-C Phone Charger",
+    tag:"Electronics",
+    desc:"A manufacturer produces USB-C charging cables identical to hundreds of others on Amazon. Customers search 'cheapest charger' and sort by price. The product charges phones — nothing more.",
+    vars:{"Product Life Cycle":"Mature — fully commoditized","Competition":"Hundreds of identical sellers","Product Type":"Commodity hardware","Production Cost":"Very low at scale","Customer Behavior":"Pure price-driven search","Differentiation":"None whatsoever"},
+    correct:"economy",
+    exp:"When a product is a pure commodity with zero differentiation, price is the only decision factor. Economy pricing — minimizing costs and offering the lowest sustainable price — is the only viable strategy. Profitability comes entirely from massive volume at a razor-thin margin."
+  },
+  {
+    title:"Limited Sneaker Collab Drop",
+    tag:"Fashion",
+    desc:"Nike releases a collaboration sneaker with a famous artist — only 5,000 pairs ever made. Social media hype is massive. Both Nike and the artist have enormous brand prestige. Buyers see these as status symbols.",
+    vars:{"Product Life Cycle":"New product drop, mature brand","Competition":"No exact substitute exists","Product Type":"Fashion status item","Production Cost":"Moderate","Scarcity":"5,000 pairs only","Social Signal":"High status, celebrity-tied"},
+    correct:"premium",
+    exp:"Scarcity plus brand prestige plus celebrity association create ideal conditions for premium pricing. Buyers pay for status and exclusivity, not materials. A low price would destroy desirability — luxury buyers trust that a high price means authentic value."
+  },
+  {
+    title:"Cloud Storage for Small Businesses",
+    tag:"B2B Technology",
+    desc:"A cloud company offers data storage and backup for small businesses. Their cost is $0.02 per GB. Clients range from 100GB to 10TB. Every contract — regardless of size — must be profitable.",
+    vars:{"Product Life Cycle":"Growth","Competition":"AWS, Google, Dropbox Business","Product Type":"B2B digital service","Production Cost":"$0.02/GB — clear and stable","Client Range":"100GB to 10TB","Goal":"Guaranteed profit on every contract"},
+    correct:"costplus",
+    exp:"A clear, per-unit production cost makes cost-plus pricing the most reliable strategy. For any client at any size, the company calculates the exact cost to serve them and adds a fixed profit margin. This guarantees profitability at every price point and scales naturally with client size."
+  }
+];
+
+let name='',rc=0,cor=0,wr=0,str=0,hist=[],queue=[],cur=null,ans=false;
+
+function go(){
+  const n=document.getElementById('sName').value.trim();
+  if(!n){document.getElementById('sName').focus();return;}
+  name=n;
+  document.getElementById('nameSection').classList.add('hidden');
+  document.getElementById('gameSection').classList.remove('hidden');
+  buildRef();
+  queue=[...SC].sort(()=>Math.random()-0.5);
+  load();
+}
+
+function buildRef(){
+  document.getElementById('refGrid').innerHTML=Object.entries(ST).map(([k,s])=>
+    '<div class="ri"><div class="ri-n">'+s.name+'</div><div class="ri-d">'+s.hint+'</div></div>'
+  ).join('');
+}
+
+function toggleRef(){
+  const p=document.getElementById('refPanel'),o=p.classList.toggle('open');
+  document.getElementById('rl').textContent=o?'Hide Strategy Reference':'Show Strategy Reference';
+}
+
+function load(){
+  if(rc>=15){showRefl();return;}
+  cur=queue[rc%queue.length];ans=false;
+  document.getElementById('scN').textContent='SCENARIO '+(rc+1)+' OF 15';
+  document.getElementById('scT').textContent=cur.tag;
+  document.getElementById('scTi').textContent=cur.title;
+  document.getElementById('scD').textContent=cur.desc;
+  document.getElementById('vg').innerHTML=Object.entries(cur.vars).map(([k,v])=>
+    '<div class="vp"><div class="vp-k">'+k+'</div><div class="vp-v">'+v+'</div></div>'
+  ).join('');
+  const keys=Object.keys(ST).sort(()=>Math.random()-0.5);
+  document.getElementById('sg').innerHTML=keys.map(k=>
+    '<button class="sb" data-k="'+k+'" onclick="pick(\''+k+'\')"><div class="sb-n">'+ST[k].name+'</div><div class="sb-h">'+ST[k].hint+'</div></button>'
+  ).join('');
+  document.getElementById('fb').className='fb';
+  document.getElementById('pf').style.width=(rc/15*100)+'%';
+  document.getElementById('rn').textContent=rc;
+}
+
+function pick(k){
+  if(ans)return;ans=true;
+  const ok=k===cur.correct;
+  if(ok){cor++;str++;}else{wr++;str=0;}
+  document.querySelectorAll('.sb').forEach(function(b){
+    b.disabled=true;
+    var bk=b.dataset.k;
+    if(bk===cur.correct)b.classList.add('correct');
+    else if(bk===k&&!ok)b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  var fb=document.getElementById('fb');
+  fb.className='fb show '+(ok?'cfb':'wfb');
+  document.getElementById('fbv').innerHTML=ok
+    ?'&#10003; Correct! That\'s <strong>'+ST[k].name+'</strong>.'
+    :'&#10007; Not quite. You chose <strong>'+ST[k].name+'</strong> &mdash; the better answer is <strong>'+ST[cur.correct].name+'</strong>.';
+  document.getElementById('fbe').textContent=cur.exp;
+  document.getElementById('nb').textContent=rc===14?'Continue to Reflections \u2192':'Next Scenario \u2192';
+  document.getElementById('sc').textContent=cor;
+  document.getElementById('sw').textContent=wr;
+  var t=cor+wr;
+  document.getElementById('sa').textContent=t?Math.round(cor/t*100)+'%':'--';
+  document.getElementById('ss').textContent=str+(str>=3?' \uD83D\uDD25':'');
+  hist.push({n:rc+1,title:cur.title,chose:ST[k].name,ans:ST[cur.correct].name,ok:ok});
+}
+
+function next(){
+  rc++;
+  if(rc>=15){showRefl();return;}
+  load();
+  document.getElementById('scCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showRefl(){
+  document.getElementById('pf').style.width='100%';
+  document.getElementById('rn').textContent=15;
+  document.getElementById('gameSection').classList.add('hidden');
+  var rs=document.getElementById('refSec');
+  rs.classList.add('show');
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function submitR(){
+  if(!document.getElementById('r1').value.trim()||!document.getElementById('r2').value.trim()||!document.getElementById('r3').value.trim()){
+    alert('Please answer all 3 reflection questions before submitting.');return;
+  }
+  document.getElementById('refSec').classList.remove('show');
+  showSum();
+}
+
+function showSum(){
+  var pct=Math.round(cor/15*100);
+  var g=pct>=90?'Outstanding \uD83C\uDFC6':pct>=70?'Good Work \uD83D\uDC4D':pct>=50?'Keep Practicing \uD83D\uDCDA':'Review Strategies \uD83D\uDD04';
+  document.getElementById('sumH').textContent=name+' \u2014 '+cor+'/15 correct ('+pct+'%) \u00B7 '+g;
+  document.getElementById('sumB').innerHTML=hist.map(function(h){
+    return '<tr><td style="color:var(--ink3)">'+h.n+'</td><td>'+h.title+'</td><td class="'+(h.ok?'cc':'wc')+'">'+h.chose+'</td><td>'+h.ans+'</td><td><span class="stamp '+(h.ok?'c':'w')+'">'+(h.ok?'\u2713 Correct':'\u2717 Wrong')+'</span></td></tr>';
+  }).join('');
+  var ss=document.getElementById('sumSec');
+  ss.classList.add('show');
+  ss.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('expSec').classList.add('show');
+}
+
+function dl(){
+  var pct=Math.round(cor/15*100);
+  var now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  var g=pct>=90?'Outstanding':pct>=70?'Good Work':pct>=50?'Keep Practicing':'Review Strategies';
+  var L=[
+    '=======================================================',
+    '  PRICING STRATEGY CHALLENGE -- STUDENT REPORT',
+    '  Windham High School | BMET | Dr. Sanchez',
+    '=======================================================',
+    '',
+    '  Student : '+name,
+    '  Date    : '+now,
+    '  Score   : '+cor+' / 15 ('+pct+'%)',
+    '  Grade   : '+g,
+    '',
+    '-------------------------------------------------------',
+    '  SCENARIO RESULTS',
+    '-------------------------------------------------------',
+    ''
+  ];
+  hist.forEach(function(h){
+    L.push('  #'+h.n+': '+h.title);
+    L.push('    Your Answer    : '+h.chose);
+    L.push('    Correct Answer : '+h.ans);
+    L.push('    Result         : '+(h.ok?'CORRECT':'INCORRECT'));
+    L.push('');
+  });
+  L.push('-------------------------------------------------------');
+  L.push('  REFLECTION QUESTIONS');
+  L.push('-------------------------------------------------------');
+  L.push('');
+  L.push('Q1. Most challenging strategy to identify:');
+  L.push(document.getElementById('r1').value);
+  L.push('');
+  L.push('Q2. Scenario I got wrong -- why the correct answer was better:');
+  L.push(document.getElementById('r2').value);
+  L.push('');
+  L.push('Q3. Real-world pricing example and analysis:');
+  L.push(document.getElementById('r3').value);
+  L.push('');
+  L.push('=======================================================');
+  L.push('  END OF REPORT | Windham High School | Dr. Sanchez');
+  L.push('=======================================================');
+  var blob=new Blob([L.join('\n')],{type:'text/plain'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download=name.replace(/\s+/g,'_')+'_Pricing_Report.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
